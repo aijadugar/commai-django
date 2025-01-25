@@ -24,4 +24,6 @@ urlpatterns = [
     path('services/text_interaction/', views.text_interaction, name='text_interaction'),
     path('services/speech_interaction/', views.speech_interaction, name = 'speech_interaction'),
     path('services/daily_tasks/', views.daily_tasks, name = 'daily_tasks'),
+    path('partners/partners/', views.partners, name = 'partners'),
+    path('contactus/contactus/', views.contactus, name = 'contactus'),
 ]

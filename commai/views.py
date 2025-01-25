@@ -12,3 +12,9 @@ def speech_interaction(request):
 
 def daily_tasks(request):
     return render(request, 'services/daily_tasks.html')
+
+def partners(request):
+    return render(request, 'partners/partners.html')
+
+def contactus(request):
+    return render(request, 'more/contactus.html')
