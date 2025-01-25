@@ -7,6 +7,7 @@ body {
   padding: 0;
 }
 
+
 .navbar {
   margin-bottom: 20px;
   border-bottom: 1px solid #ddd;
@@ -17,16 +18,43 @@ body {
   font-weight: bold;
 }
 
+.header{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+}
+
+
 
 h1 {
   text-align: center;
-  margin-top: 50px;
-  font-size: 100px;
+  margin-top: 110px;
   background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
-  -webkit-background-clip: text;  /* Use the correct property here */
-  color: transparent;  /* Keep the text transparent to show the gradient */
+  -webkit-background-clip: text; 
+  color: transparent;  
+  font-size:100px;
 }
 
+@media (max-width: 768px) {
+  h1 {
+    font-size: 60px; 
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 40px; 
+  }
+
+}
+
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 40px; 
+  }
+}
 
 .container p {
   font-size: 1.2rem;
@@ -55,7 +83,6 @@ nav{
 }
 
 .dropdown-menu {
-  /* background-color: #f8f9fa; */
   border: 1px solid black;
 }
 
@@ -69,4 +96,70 @@ nav{
 
 .container {
   margin-top: 50px;
+}
+
+/* General styling */
+.feature-card {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.feature-icon {
+  width: 60px;
+  height: 60px;
+}
+
+h3 {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+p {
+  font-size: 1rem;
+  color: #666;
+}
+
+/* For mobile responsiveness */
+@media (max-width: 768px) {
+  .feature-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+}
+
+.login-btn{
+  text-align:center;
+}
+
+.login-btn button{
+ padding:1em 2em;
+ background-color: #161a20;
+ border:none;
+ color:#f0f0f0;
+ font-family: 'Segoui UI';
+ position: relative;
+ border-radius:1000px;
+
+}
+
+.login-btn button::after{
+  content: '';
+  position: absolute;
+
 }

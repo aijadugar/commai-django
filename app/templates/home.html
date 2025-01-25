@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
   </head>
   <body style="height:3000px;">
+   <header class="header">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html">CommAI</a>
@@ -48,12 +49,47 @@
         </div>
       </div>
     </nav>
+</header>
 
-    <div class="container mt-5">
+    <div class="container mt-5 mb-5">
       <h1>Welcome to CommAI</h1>
-      <p>Your one-stop solution for smart interaction and task management.</p>
-      <p>Explore our services to learn more.</p>
+      <div class="login-btn"><button>Get Started</button></div>
+      <p><i>Enhancing Communication, Empowering Connections</i></p>
+      <p><i>Explore our text and speech interaction tools, daily task management solutions, and insightful assessments to transform the way you communicate.</i></p>
     </div>
+
+
+
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Our Features</h2>
+        <div class="row">
+          <!-- Feature 1: Text Interaction -->
+          <div class="col-md-4 text-center">
+            <div class="feature-card p-4">
+              <img src="text-tool-icon.png" alt="Text Interaction" class="feature-icon mb-3">
+              <h3>Text Interaction</h3>
+              <p>Analyze and enhance your writing for clarity, tone, and grammar.</p>
+            </div>
+          </div>
+          <!-- Feature 2: Speech Interaction -->
+          <div class="col-md-4 text-center">
+            <div class="feature-card p-4">
+              <img src="speech-tool-icon.png" alt="Speech Interaction" class="feature-icon mb-3">
+              <h3>Speech Interaction</h3>
+              <p>Practice and improve your speaking skills with instant feedback.</p>
+            </div>
+          </div>
+          <!-- Feature 3: Daily Tasks -->
+          <div class="col-md-4 text-center">
+            <div class="feature-card p-4">
+              <img src="tasks-icon.png" alt="Daily Tasks" class="feature-icon mb-3">
+              <h3>Daily Tasks</h3>
+              <p>Organize your day effectively with personalized task management.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
