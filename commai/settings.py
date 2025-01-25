@@ -134,6 +134,12 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# For production, ensure to set up STATICFILES_DIRS (if necessary)
+STATICFILES_DIRS = [
+    BASE_DIR / "static",  # this ensures the static files are properly served during development
+]
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 

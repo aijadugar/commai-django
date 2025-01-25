@@ -1,0 +1,72 @@
+/* home.css */
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: black;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+
+h1 {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 100px;
+  background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+  -webkit-background-clip: text;  /* Use the correct property here */
+  color: transparent;  /* Keep the text transparent to show the gradient */
+}
+
+
+.container p {
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: 20px;
+  color: #555;
+}
+
+
+nav{
+  position:fixed;
+  top:0;
+}
+
+.nav-item {
+  font-size: 1rem;
+}
+
+.navbar-nav .nav-item a {
+  color: black;
+}
+
+.navbar-nav .nav-item a:hover {
+  background-color: black;
+  color: white;
+}
+
+.dropdown-menu {
+  /* background-color: #f8f9fa; */
+  border: 1px solid black;
+}
+
+.dropdown-item {
+  font-size: 1rem;
+}
+
+.dropdown-item:hover {
+  background-color: #e9ecef;
+}
+
+.container {
+  margin-top: 50px;
+}
