@@ -23,6 +23,7 @@ body {
   top:0;
   left:0;
   right:0;
+  z-index:999;
 }
 
 
@@ -155,6 +156,7 @@ p {
  font-family: 'Segoui UI';
  position: relative;
  border-radius:1000px;
+ z-index:1;
 
 }
 
