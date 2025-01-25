@@ -27,10 +27,11 @@
                 Services
               </a>
               <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
-                <li><a class="dropdown-item" href="text-interaction.html">Text Interaction</a></li>
-                <li><a class="dropdown-item" href="speech-interaction.html">Speech Interaction</a></li>
-                <li><a class="dropdown-item" href="daily-tasks.html">Daily Tasks</a></li>
-              </ul>
+                <li><a class="dropdown-item" href="{% url 'text_interaction' %}">Text Interaction</a></li>
+                <li><a class="dropdown-item" href="{% url 'speech_interaction' %}">Speech Interaction</a></li>
+                <li><a class="dropdown-item" href="{% url 'daily_tasks' %}">Daily Tasks</a></li>
+            </ul>
+            
             </li>
             <li class="nav-item">
               <a class="nav-link" href="partners.html">Partners</a>

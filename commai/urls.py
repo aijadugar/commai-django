@@ -21,4 +21,7 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home, name='home'),
+    path('services/text_interaction/', views.text_interaction, name='text_interaction'),
+    path('services/speech_interaction/', views.speech_interaction, name = 'speech_interaction'),
+    path('services/daily_tasks/', views.daily_tasks, name = 'daily_tasks'),
 ]
