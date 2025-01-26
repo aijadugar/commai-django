@@ -1,5 +1,16 @@
 let conversation = [];
 
+function getCSRFToken() {
+    let csrfToken = null;
+    const cookies = document.cookie.split(';');
+    cookies.forEach(cookie => {
+        if (cookie.trim().startsWith('csrftoken=')) {
+            csrfToken = cookie.trim().substring('csrftoken='.length);
+        }
+    });
+    return csrfToken;
+}
+
 function sendMessage() {
     const userInput = document.getElementById('userInput').value;
     appendMessage(userInput, 'user');
@@ -9,7 +20,10 @@ function sendMessage() {
     // Send user input to the backend
     fetch('/ask', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCSRFToken()  // Add CSRF token in header
+        },
         body: JSON.stringify({ message: userInput })
     })
     .then(response => response.json())
@@ -34,7 +48,10 @@ function submitConversation() {
 
     fetch('/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCSRFToken()  // Add CSRF token in header
+        },
         body: JSON.stringify({ conversation: conversationData })
     })
     .then(response => response.json())
@@ -78,7 +95,10 @@ function startRecognition() {
         // Send speech result to the backend
         fetch('/ask', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCSRFToken()  // Add CSRF token in header
+            },
             body: JSON.stringify({ message: speechResult })
         })
         .then(response => response.json())

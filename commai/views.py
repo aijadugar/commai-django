@@ -1,11 +1,36 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+import google.generativeai as genai
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 # Create your views here.
 def home(request):
     return render(request, 'home.html')
 
 def text_interaction(request):
+    return render(request, 'services/text_interaction.html')
+
+# Configure the Gemini API with the API key
+G_API_KEY = 'AIzaSyAh1SVrLBQbEW5OfRsDFxccnNJXe0rpJYY'
+genai.configure(api_key=G_API_KEY)
+model = genai.GenerativeModel('gemini-pro')
+
+# View to handle the ask functionality
+@csrf_exempt
+def ask(request):
+    if request.method == 'POST':
+        user_input = request.body.decode('utf-8')
+        
+        # Send the user input to the Gemini API and get the response
+        response = model.generate_content(user_input)
+        
+        # Get the response text from Gemini
+        ai_response = response.text
+        # print(ai_response)
+        # Return the AI response as a JSON response
+        return JsonResponse({'response': ai_response})
+    
     return render(request, 'services/text_interaction.html')
 
 def speech_interaction(request):
