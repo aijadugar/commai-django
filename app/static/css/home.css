@@ -3,7 +3,7 @@
 body {
   font-family: Arial, sans-serif;
   /* background-color: rgb(52, 50, 50); */
-  background-color: rgb(27, 27, 27);
+  background-color: rgb(33, 32, 32);
   margin: 0;
   padding: 0;
 }
@@ -292,7 +292,7 @@ ul {
 }
 
 .footer {
-  background-color: black;
+  background-color: rgb(177, 172, 172);
   padding: 70px 0;
   position: relative;
 }
