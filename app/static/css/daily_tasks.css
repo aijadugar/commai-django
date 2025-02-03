@@ -1,0 +1,82 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  background-color: #343a40;
+  padding: 1em;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  margin: 0 1em;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+}
+
+.navbar a.active {
+  background-color: #007bff;
+}
+
+.navbar a:hover {
+  background-color: #495057;
+}
+
+.content {
+  max-width: 800px;
+  margin: 2em auto;
+  padding: 1em;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-container {
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+.exercise-section {
+  display: none;
+}
+
+.exercise-section.active {
+  display: block;
+}
+
+.form-group {
+  margin-bottom: 1em;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5em;
+  font-weight: bold;
+}
+
+.form-group textarea,
+.form-group input {
+  width: 100%;
+  padding: 0.75em;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+}
+
+.btn {
+  background-color: #007bff;
+  color: white;
+  padding: 0.75em 1.5em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}

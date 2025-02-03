@@ -1,0 +1,123 @@
+.navbar {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+/*active*/
+/* Active link styling */
+.navbar-nav .nav-link.active {
+  color: white !important;
+  background-color: #e91e63 !important;
+  border-radius: 10px;
+}
+
+/* Dropdown toggle should not be fully colored red */
+.navbar-nav .dropdown-toggle.dropdown-active {
+  /* background-color: transparent !important; */
+  /* Keep original color */
+  color: black !important;
+  /* Only change text color */
+}
+
+
+
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+.navbar {
+  position: relative;
+}
+
+.github {
+  position: absolute;
+  right: 15px;
+}
+
+@media(max-width:768px) {
+  .github {
+    position: absolute;
+    right: 50px;
+    top: 10px;
+  }
+}
+
+/*Medium size screens*/
+@media(max-width: 1024px) and(min-width:768px) {
+  .github {
+    right: 20px;
+    top: 15px;
+  }
+}
+
+nav {
+  position: fixed;
+  top: 0;
+}
+
+.nav-item {
+  font-size: 1rem;
+}
+
+.navbar-nav .nav-item a {
+  color: black !important;
+}
+
+.navbar-nav {
+  display: flex;
+  justify-content: center;
+  /* Horizontally centers the navbar items */
+  align-items: center;
+  /* Vertically centers the navbar items */
+}
+
+.navbar-nav li {
+  list-style: none;
+  /* Removes list bullets, if any */
+  padding: 0 15px;
+  /* Adds space between each item */
+}
+
+.navbar-nav a {
+  text-decoration: none;
+  /* Removes underline from links */
+  color: black;
+  /* Set color to white or any color you like */
+}
+
+
+.navbar-nav .nav-item a:hover {
+  background-color: black;
+  border-radius: 10px;
+  color: white !important;
+}
+
+.dropdown-menu {
+  border: none;
+}
+
+.dropdown-item {
+  font-size: 1rem;
+}
+
+
+.dropdown-item:hover {
+  background-color: #e9ecef;
+}
+
+.github-icon {
+  height: 40px;
+  width: 40px;
+  margin-right: 20px;
+}

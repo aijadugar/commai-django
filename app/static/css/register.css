@@ -1,0 +1,136 @@
+body {
+  background: url('background_img.webp');
+  font-family: Roboto, Arial;
+  background-size: 100%;
+  height:100%;
+  margin:0;
+  background-position: center;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: blue;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: inline-block;
+  height: 720px;
+  width: 400px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.5));
+  backdrop-filter: blur(10px);
+  --webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid;
+  color: white;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* input::placeholder{
+  background:linear-gradient(135deg, rgba(255,255,255,0.1),rgba(255,255,255,0.5));
+  backdrop-filter:blur(10px);
+  --webkit-backdrop-filter:blur(10px);
+} */
+
+input {
+  padding-left: 15px;
+  font-size: 14px;
+  display: block;
+  border: none;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.5));
+  backdrop-filter: blur(10px);
+  --webkit-backdrop-filter: blur(10px);
+}
+
+input::placeholder{
+  color:rgb(61, 61, 61);
+}
+
+input:focus {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+  border: none;
+}
+
+#names, #username, #email, #password, #cpassword {
+  width: 300px;
+  height: 35px;
+}
+
+.name-container, .username-container, .email-container {
+  position: relative;
+}
+
+#user-icon {
+  position: absolute;
+  right: 55px;
+  top: 46px;
+  color: grey;
+  font-size:17px;
+}
+
+.password-container , .cpassword-container {
+  position: relative;
+}
+
+#pass-icon1, #pass-icon2 {
+  position: absolute;
+  top: 46px;
+  right: 55px;
+  color: grey;
+  cursor: pointer;
+}
+
+
+.inner-container {
+  padding-left: 40px;
+}
+
+
+
+h2 {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+input:focus {
+  /* border:none; */
+  outline: none;
+}
+
+label {
+  display: block;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.button {
+  margin-top: 40px;
+  width: 318px;
+  height: 35px;
+  background-color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.button:hover{
+  background-color: black;
+  color:white;
+}
+
+.links{
+  margin-top:10px;
+}
+
+.links a{
+  text-decoration: none;
+  color:white;
+}
+
+.links a:hover{
+  color:black;
+}
