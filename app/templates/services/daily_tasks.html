@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Tasks - CommAI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #343a40;
+            padding: 1em;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1em;
+            padding: 0.5em 1em;
+            border-radius: 5px;
+        }
+        .navbar a.active {
+            background-color: #007bff;
+        }
+        .navbar a:hover {
+            background-color: #495057;
+        }
+        .content {
+            max-width: 800px;
+            margin: 2em auto;
+            padding: 1em;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .toggle-container {
+            text-align: center;
+            margin-bottom: 2em;
+        }
+        .exercise-section {
+            display: none;
+        }
+        .exercise-section.active {
+            display: block;
+        }
+        .form-group {
+            margin-bottom: 1em;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5em;
+            font-weight: bold;
+        }
+        .form-group textarea, 
+        .form-group input {
+            width: 100%;
+            padding: 0.75em;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 0.75em 1.5em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script>
+        function toggleSection(section) {
+            document.querySelectorAll('.exercise-section').forEach(el => el.classList.remove('active'));
+            document.getElementById(section).classList.add('active');
+            document.querySelectorAll('.navbar a').forEach(el => el.classList.remove('active'));
+            document.querySelector(`[data-section="${section}"]`).classList.add('active');
+        }
+    </script>
+</head>
+<body>
+    <header class="navbar">
+        <a href="javascript:void(0);" class="active" data-section="writing-section" onclick="toggleSection('writing-section')">Writing Exercises</a>
+        <a href="javascript:void(0);" data-section="speaking-section" onclick="toggleSection('speaking-section')">Speaking Exercises</a>
+    </header>
+
+    <main class="content">
+        <!-- Writing Exercises Section -->
+        <section id="writing-section" class="exercise-section active">
+            <h2>Writing Exercises</h2>
+            <form method="post" action="{% url 'submit_writing_exercise' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="writing-task">Write about today's topic:</label>
+                    <textarea id="writing-task" name="writing_task" rows="6" placeholder="Start writing here..."></textarea>
+                </div>
+                <button type="submit" class="btn">Submit Writing</button>
+            </form>
+        </section>
+
+        <!-- Speaking Exercises Section -->
+        <section id="speaking-section" class="exercise-section">
+            <h2>Speaking Exercises</h2>
+            <form method="post" action="{% url 'submit_speaking_exercise' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="speaking-topic">Record your response for today's topic:</label>
+                    <input type="text" id="speaking-topic" name="speaking_topic" placeholder="Describe your response...">
+                </div>
+                <button type="button" class="btn" onclick="alert('Recording started...')">Start Recording</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

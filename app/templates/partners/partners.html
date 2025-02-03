@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partners</title>
+    <!-- Load Static Files (CSS, Images) -->
+    {% load static %}
+    <link rel="stylesheet" href="">
+    <style>
+        /* Inline Styling (Replace with External CSS File) */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 30px auto;
+            max-width: 1200px;
+        }
+        .profile-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+            width: 300px;
+        }
+        .profile-card img {
+            width: 100%;
+            height: auto;
+            border-bottom: 1px solid #ddd;
+        }
+        .profile-card h2 {
+            margin: 15px 0 5px;
+            color: #222;
+        }
+        .profile-card p {
+            font-size: 14px;
+            color: #666;
+            margin: 10px;
+        }
+        .skills {
+            font-weight: bold;
+            color: #555;
+            margin: 10px;
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .social-icons a {
+            color: #555;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        .social-icons a:hover {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Meet Our Partners</h1>
+    <div class="container">
+        <!-- Partner 1 -->
+        <div class="profile-card">
+            <img src="images/partner1.jpg" alt="Partner 1">
+            <h2>John Doe</h2>
+            <p>AI Developer with expertise in Machine Learning and NLP. Passionate about creating tools to enhance communication skills.</p>
+            <div class="skills">Skills: Python, Django, NLP, AI</div>
+            <div class="social-icons">
+                <a href="https://github.com/johndoe" target="_blank">GitHub</a>
+                <a href="https://linkedin.com/in/johndoe" target="_blank">LinkedIn</a>
+                <a href="https://twitter.com/johndoe" target="_blank">Twitter</a>
+            </div>
+        </div>
+
+        <!-- Partner 2 -->
+        <div class="profile-card">
+            <img src="images/partner2.jpg" alt="Partner 2">
+            <h2>Jane Smith</h2>
+            <p>Front-End Developer specializing in creating responsive and accessible web interfaces. Expert in modern UI/UX design principles.</p>
+            <div class="skills">Skills: HTML, CSS, JavaScript, React</div>
+            <div class="social-icons">
+                <a href="https://github.com/janesmith" target="_blank">GitHub</a>
+                <a href="https://linkedin.com/in/janesmith" target="_blank">LinkedIn</a>
+                <a href="https://twitter.com/janesmith" target="_blank">Twitter</a>
+            </div>
+        </div>
+
+        <!-- Partner 3 -->
+        <div class="profile-card">
+            <img src="images/partner3.jpg" alt="Partner 3">
+            <h2>Chris Lee</h2>
+            <p>Data Scientist and Backend Engineer with a strong focus on statistical modeling, database design, and API development.</p>
+            <div class="skills">Skills: R, Python, SQL, Flask</div>
+            <div class="social-icons">
+                <a href="https://github.com/chrislee" target="_blank">GitHub</a>
+                <a href="https://linkedin.com/in/chrislee" target="_blank">LinkedIn</a>
+                <a href="https://twitter.com/chrislee" target="_blank">Twitter</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
