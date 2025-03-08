@@ -14,6 +14,13 @@ import google.generativeai as genai
 from django.views.decorators.csrf import csrf_exempt
 import json
 
+from .model import SpellCheckerModule
+
+from django.contrib import messages
+
+spell_checker_module=SpellCheckerModule()
+
+
 # Home page for logged-in users (the main page of the service)
 def home(request):
     return render(request, 'home.html')
@@ -51,14 +58,28 @@ def speech_interaction(request):
 def daily_tasks(request):
     return render(request, 'services/daily_tasks.html')
 
+def easy_mode(request):
+    return render(request, 'services/easy_mode.html')
+
 def submit_writing_exercise(request):
     """Handle the submission of writing exercises."""
     if request.method == 'POST':
-        writing_task = request.POST.get('writing_task')
-        # Process the writing task here
-        print(f"Writing Task Received: {writing_task}")  # For debugging purposes
-        return HttpResponse("Thank you for submitting your writing exercise!")
-    return redirect('daily_tasks')  # Redirect to the daily tasks page if not POST
+        text = request.POST.get('writing_task')  # Correct form access
+        corrected_text = spell_checker_module.correct_spell(text)  # Correct spelling mistakes
+        corrected_grammar,errors_count,suggestions = spell_checker_module.get_grammar_errors(text)  # Correct grammar errors
+        # Use Django's messages framework to pass the data to the template
+        
+        # Show grammar corrections along with suggestions
+        if errors_count > 0:
+            messages.success(request, f"Corrected text: {corrected_text}")
+            messages.success(request, f"Grammatical Errors & misspelled Words: {corrected_grammar}")
+            # messages.success(request, f"Suggestions: {suggestions}")
+        else:
+            messages.success(request, "No grammar errors found.")
+        
+        return redirect('daily_tasks')  # Redirect to the daily tasks page
+    
+    return redirect('daily_tasks')  # Redirect to the daily tasks page 
 
 def submit_speaking_exercise(request):
     """Handle the submission of speaking exercises."""

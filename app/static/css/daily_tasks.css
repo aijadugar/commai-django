@@ -1,45 +1,55 @@
-body {
-  font-family: Arial, sans-serif;
+/* General Styles */
+* {
   margin: 0;
   padding: 0;
-  background-color: #f8f9fa;
+  box-sizing: border-box;
 }
 
+body {
+  font-family: Arial, sans-serif;
+  background-color:black;
+  color: #333;
+  line-height: 1.6;
+  padding: 20px;
+}
+
+h2 {
+  color: #444;
+  margin-bottom: 20px;
+}
+
+/* Navbar Styles */
 .navbar {
   display: flex;
   justify-content: center;
-  background-color: #343a40;
-  padding: 1em;
+  background-color: #2d3e50;
+  padding: 10px;
+  border-radius: 8px;
 }
 
 .navbar a {
-  color: white;
+  color: #fff;
   text-decoration: none;
-  margin: 0 1em;
-  padding: 0.5em 1em;
-  border-radius: 5px;
-}
-
-.navbar a.active {
-  background-color: #007bff;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 
 .navbar a:hover {
-  background-color: #495057;
+  background-color: #3b4e68;
 }
 
+.navbar .active {
+  background-color: #005f77;
+}
+
+/* Content Styles */
 .content {
-  max-width: 800px;
-  margin: 2em auto;
-  padding: 1em;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.toggle-container {
-  text-align: center;
-  margin-bottom: 2em;
+  margin-top: 20px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .exercise-section {
@@ -51,32 +61,64 @@ body {
 }
 
 .form-group {
-  margin-bottom: 1em;
+  margin-bottom: 20px;
 }
 
-.form-group label {
+label {
+  font-size: 1rem;
+  margin-bottom: 8px;
   display: block;
-  margin-bottom: 0.5em;
   font-weight: bold;
 }
 
-.form-group textarea,
-.form-group input {
+textarea,
+input[type="text"] {
   width: 100%;
-  padding: 0.75em;
-  border: 1px solid #ced4da;
-  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  resize: vertical;
 }
 
-.btn {
+textarea {
+  min-height: 120px;
+}
+
+button.btn {
   background-color: #007bff;
   color: white;
-  padding: 0.75em 1.5em;
+  padding: 10px 20px;
+  font-size: 1rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.btn:hover {
+button.btn:hover {
   background-color: #0056b3;
+}
+
+button[type="button"] {
+  background-color: #28a745;
+}
+
+button[type="button"]:hover {
+  background-color: #218838;
+}
+
+/* Message Styles */
+.messages {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f8d7da;
+  border-radius: 6px;
+  border: 1px solid #f5c6cb;
+}
+
+.message {
+  color: #721c24;
+  font-size: 1rem;
+  margin: 5px 0;
 }
