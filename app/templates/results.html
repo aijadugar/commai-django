@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversation Analysis</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="analysis-container">
+        <h2>Conversation Analysis</h2>
+        <div class="conversation-box">
+            {% for msg in conversation_data %}
+                <p><strong>{{ msg.sender }}:</strong> {{ msg.text }}</p>
+            {% endfor %}
+        </div>
+        <h3>Analysis:</h3>
+        <p>{{ level }}</p>
+        <a href="{% url 'text_interaction' %}">Start a New Conversation</a>
+    </div>
+</body>
+</html>

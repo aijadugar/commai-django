@@ -43,26 +43,26 @@ function appendMessage(message, sender) {
     chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-function submitConversation() {
-    const conversationData = JSON.stringify(conversation);
+// function submitConversation() {
+//     const userInput = document.getElementById("userInput").value;
 
-    fetch('/submit', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': getCSRFToken()  // Add CSRF token in header
-        },
-        body: JSON.stringify({ conversation: conversationData })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'success') {
-            window.location.href = `/results?data=${encodeURIComponent(conversationData)}`;
-        } else {
-            alert('Error saving conversation: ' + data.message);
-        }
-    });
-}
+//     fetch("/submit/", {  // Ensure the correct endpoint
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json",
+//             "X-CSRFToken": getCSRFToken()  // Ensure CSRF token is included
+//         },
+//         body: JSON.stringify({ conversation: userInput })
+//     })
+//     .then(response => response.text())  // Get HTML response
+//     .then(html => {
+//         document.open();
+//         document.write(html);  // Replace page content with results.html
+//         document.close();
+//     })
+//     .catch(error => console.error("Error:", error));
+// }
+
 
 function adjustInputHeight() {
     const textarea = document.getElementById('userInput');

@@ -1,6 +1,21 @@
 <!doctype html>
 <html lang="en">
 
+<!-- GIF logo tikde to square round shaped kar... -->
+<!-- how works madhe ekdam white nako... -->
+<!-- classical footer add karu aapan me deto... -->
+<!-- https://github.com/aijadugar/Code-dot/tree/main/classic_footer -->
+
+
+
+<!-- new feature: first home page disayla pahije...  -->
+<!-- new option: Why CommAI? add karaycha aani popup description dakhvaych... -->
+<!-- Log in    lavaycha aani mag services access dyaych...  -->
+
+
+<!-- Documentation mi hardcode karto...nantar tu parat finalize kar...  -->
+
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,111 +26,28 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Corrected path to CSS using Django static tag -->
 
-    <link rel="stylesheet" href="{% static 'css/home.css' %}">
-    
+    <link rel="stylesheet" href="{% static 'css/home.css' %}?v={{ version }}">
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
 </head>
 
-<body>
-    <header class="header">
-        <nav class="navbar navbar-expand-lg navbar-text-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="index.html">CommAI</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html">Home</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Services
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
-                                <li><a class="dropdown-item" href="{% url 'text_interaction' %}">Text Interaction</a>
-                                </li>
-                                <li><a class="dropdown-item" href="{% url 'speech_interaction' %}">Speech
-                                        Interaction</a></li>
-                                <li><a class="dropdown-item" href="{% url 'daily_tasks' %}">Daily Tasks</a></li>
-                            </ul>
+<body class="bg-dark">
 
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="partners.html">Partners</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="moreDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                More
-                            </a>
-                            <ul class="dropdown-menu " aria-labelledby="moreDropdown">
-                                <li><a class="dropdown-item" href="contact.html">Contact Us</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="github">
-                <a href="https://github.com/OnlyCR7/CommAI" target="_blank">
-                    <img src="{% static 'img/github.png' %}" alt="GitHub" class="github-icon" id="github-icon">
-                </a>
-            </div>
-        </nav>
-    </header>
-
-    <link rel="stylesheet" href="{% static 'css/home.css' %}">
-  </head>
-  <body>
-   <header class="header">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'home' %}">CommAI</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'home' %}">Home</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Services
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
-                <li><a class="dropdown-item" href="{% url 'text_interaction' %}">Text Interaction</a></li>
-                <li><a class="dropdown-item" href="{% url 'speech_interaction' %}">Speech Interaction</a></li>
-                <li><a class="dropdown-item" href="{% url 'daily_tasks' %}">Daily Tasks</a></li>
-            </ul>
-            
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'partners' %}">Partners</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="moreDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                More
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="moreDropdown">
-                <li><a class="dropdown-item" href="{% url 'contactus' %}">Contact Us</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-</header>
+    {% include 'layouts/header.html' %}
 
     <div class="container mt-5 mb-5">
         <h1>Welcome to CommAI</h1>
-        <div class="login-btn"><button>Get Started</button></div>
+
+        <div class="docs-btn">
+            <a href = {% url 'documentation' %} target = "_blank">
+                <button>Read Docs</button>
+            </a>
+        </div>
+
         <p><i>Enhancing Communication, Empowering Connections</i></p>
-        <p><i>Explore our text and speech interaction tools, daily task management solutions, and insightful assessments
+        <p><i>Explore our text and speech interaction tools, daily task management solutions, and insightful
+                assessments
                 to transform the way you communicate.</i></p>
     </div>
 
@@ -137,7 +69,8 @@
                 <div class="feature-card p-4 bg-success">
                     <i class="fas fa-microphone fa-3x mb-3 text-dark"></i>
                     <h3>Speech Interaction</h3>
-                    <p>Practice and improve your speaking skills with instant feedback and personalized suggestions.</p>
+                    <p>Practice and improve your speaking skills with instant feedback and personalized suggestions.
+                    </p>
                 </div>
             </div>
             <!-- Feature 3: Daily Tasks -->
@@ -158,7 +91,8 @@
                 <div class="feature-card p-4">
                     <i class="fas fa-spell-check fa-3x mb-3 text-warning"></i>
                     <h3>Error Detection</h3>
-                    <p>Identify and correct misspelled words or incorrectly written text, ensuring your communication is clear and error-free.</p>
+                    <p>Identify and correct misspelled words or incorrectly written text, ensuring your
+                        communication is clear and error-free.</p>
                 </div>
             </div>
             <!-- Feature 2: View Your Results -->
@@ -166,7 +100,8 @@
                 <div class="feature-card p-4">
                     <i class="fas fa-microscope fa-3x mb-3 text-success"></i>
                     <h3>View Results</h3>
-                    <p>Get detailed insights into your communication performance, highlighting areas for your improvement.
+                    <p>Get detailed insights into your communication performance, highlighting areas for your
+                        improvement.
                     </p>
                 </div>
             </div>
@@ -175,7 +110,8 @@
                 <div class="feature-card p-4">
                     <i class="fas fa-video fa-3x mb-3 text-danger"></i>
                     <h3>Learn and Improve</h3>
-                    <p>Access curated videos to enhance your communication skills, focusing on clarity, confidence, and effectiveness.</p>
+                    <p>Access curated videos to enhance your communication skills, focusing on clarity, confidence,
+                        and effectiveness.</p>
                 </div>
             </div>
         </div>
@@ -205,13 +141,14 @@
                     <h2 class="accordion-header" id="headingTwo">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Practice Texting and Speaking
+                            Practice Text and Speech
                         </button>
                     </h2>
                     <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
                         data-bs-parent="#howItWorksAccordion">
                         <div class="accordion-body">
-                            Try our various texting and speaking features on different topics and receive instant feedback to
+                            Try our various texting and speaking features on different topics and receive instant
+                            feedback to
                             improve your speech.
                         </div>
                     </div>
@@ -235,43 +172,8 @@
         </div>
     </section>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                 <div class="footer-col" id="ai_ball">
-                     <img src="{% static 'img/ai_ball.gif' %}" alt=""height="300px" width="350px">
-                 </div>
- 
-                <div class="footer-col">
-                    <h4>company</h4>
-                    <ul>
-                        <li><a href="#">about us</a></li>
-                        <li><a href="#">our services</a></li>
-                        <li><a href="#">privacy policy</a></li>
-                    </ul>
-                </div>
- 
-                <div class="footer-col">
-                    <h4>get help</h4>
-                    <ul>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">payment options</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-col">
-                    <h4>follow us</h4>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-            <p class="copyright bg-dark text-center text-light py-3">© 2025 CommAI. All rights reserved. Unauthorized use or distribution is strictly prohibited.</p>
-   </footer> 
+    {% include 'layouts/footer.html' %}
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

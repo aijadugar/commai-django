@@ -56,7 +56,7 @@ ROOT_URLCONF = 'commai.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Ensure this path is correct
+        'DIRS': [ BASE_DIR / 'app/templates' ],  # Ensure this path is correct
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -117,11 +117,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
 
 # For production, ensure to set up STATICFILES_DIRS (if necessary)
-STATICFILES_DIRS = [
-    BASE_DIR / "static",  # this ensures the static files are properly served during development
+STATIC_URL = 'static/'
+STATIC_FILE_DIRS = [
+    BASE_DIR / 'app/static'
 ]
 
 
@@ -129,3 +129,7 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+APPEND_SLASH=False
+
+CSRF_COOKIE_HTTPONLY = False

@@ -1,0 +1,76 @@
+{% extends 'layouts/app.html' %}
+{% load static %}
+
+<!-- Include CSS specific to the register page -->
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}?v={{ version }}">
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/register.js' %}?v={{ version }}"></script>
+{% endblock %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2>SIGN UP</h2>
+
+  <form action="{% url 'register' %}" method="POST">
+    {% csrf_token %}
+    <div class="inner-container">
+      <div class="name-container">
+        <label for="{{ form.names.id_for_label }}">Name</label>
+        <input type="text" placeholder="Name" id="names" name="{{ form.names.name }}">
+        <i class="fa fa-user-circle" aria-hidden="true" id="user-icon"></i>
+        {% if form.names.errors %}
+        <span class="text-danger">{{ form.names.errors }}</span>
+        {% endif %}
+      </div>
+
+      <div class="username-container">
+        <label for="{{ form.username.id_for_label }}">Username</label>
+        <input type="text" placeholder="Username" id="username" name="{{ form.username.name }}">
+        <i class="fa fa-user" aria-hidden="true" id="user-icon"></i>
+        {% if form.username.errors %}
+        <span class="text-danger">{{ form.username.errors }}</span>
+        {% endif %}
+      </div>
+
+      <div class="email-container">
+        <label for="{{ form.email.id_for_label }}">Email</label>
+        <input type="email" placeholder="Email" id="email" name="{{ form.email.name }}">
+        <i class="fa fa-envelope" aria-hidden="true" id="user-icon"></i>
+        {% if form.email.errors %}
+        <span class="text-danger">{{ form.email.errors }}</span>
+        {% endif %}
+      </div>
+
+      <div class="password-container">
+        <label for="{{ form.password1.id_for_label }}">Password</label>
+        <input type="password" placeholder="Password" id="password" name="{{ form.password1.name }}">
+        <i class="fa fa-eye-slash" aria-hidden="true" id="pass-icon1" onclick="pass('password')"></i>
+        <span class="text-danger">{{ form.password1.errors }}</span>
+      </div>
+
+      <div class="cpassword-container">
+        <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+        <input type="password" placeholder="Confirm Password" id="cpassword" name="{{ form.password2.name }}">
+        <i class="fa fa-eye-slash" aria-hidden="true" id="pass-icon2" onclick="pass('cpassword')"></i>
+        <span class="text-danger">{{ form.password2.errors }}</span>
+      </div>
+
+      <div class="links">
+        <div style="display: inline-block;margin-right:10px;margin-left:10px;margin-right:100px;">
+          <a href="#">Forgot Password</a>
+        </div>
+        <div style="display:inline-block;">
+          <a href="{% url 'login' %}">Sign In</a>
+        </div>
+      </div>
+
+      <button type="submit" class="button">Register</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'layouts/app.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% load static %}
+
+<!-- Include CSS specific to the login page -->
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}?v={{ version }}">
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/login.js' %}?v={{ version }}"></script>
+{% endblock %}
+
+{% block content %}
+<div>
+  <div class="container" style="height:450px;width:400px;">
+    <h2>SIGN IN</h2>
+
+    <!-- if user is entering wrong password, user doesn't exist -->
+    {% if form.non_field_errors %}
+    <small class="text-danger">
+      {{ form.non_field_errors.as_ul }}
+    </small>
+    {% endif %}
+
+    <form action="{% url 'login' %}" method="POST">
+      {% csrf_token %}
+      <div class="inner-container">
+        <div class="username-container">
+          <label for="{{ form.username.id_for_label }}">Username</label>
+          <input type="text" placeholder="Username" id="username" name="{{ form.username.name }}">
+          <i class="fa fa-user" aria-hidden="true" id="user-icon"></i>
+          {% if form.username.errors %}
+          <span class="text-danger">{{ form.username.errors }}</span>
+          {% endif %}
+        </div>
+
+        <div class="password-container">
+          <label for="{{ form.password.id_for_label }}">Password</label>
+          <input type="password" placeholder="Password" id="password" name="{{ form.password.name }}">
+          <i class="fa fa-eye-slash" aria-hidden="true" id="pass-icon" onclick="pass()"></i>
+          <span class="text-danger">{{ form.password.errors }}</span>
+        </div>
+
+        <div class="links">
+          <div style="display: inline-block;margin-right:10px;margin-left:10px;margin-right:100px;">
+            <a href="#">Forgot Password</a>
+          </div>
+          <div style="display:inline-block;">
+            <a href="{% url 'register' %}">Sign Up</a>
+          </div>
+        </div>
+
+        <button type="submit" class="button">Login</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  var a=0;
+    function pass(){
+      var passwordField=document.getElementById('password');
+      var icon=document.getElementById('pass-icon');
+
+      if(a===1){
+        passwordField.type='password';
+        icon.classList.remove('fa-eye')
+        icon.classList.add('fa-eye-slash');
+        a=0;
+      }
+  
+      else{
+        passwordField.type='text';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+        a=1;
+      }
+    }
+</script>
+{% endblock %}
+
