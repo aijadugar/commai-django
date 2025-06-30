@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comm AI - Interactive Chat</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="header">
+        <h1 class="strong-heading">Comm AI</h1>
+    </div>
+    
+    <div class="chat-container">
+        <div class="chat-box" id="chatBox">
+            <!-- Chat messages will be appended here -->
+        </div>
+    </div>
+    
+    <div class="input-container">
+        <div class="input-box">
+            <textarea id="userInput" placeholder="Type your response here..." oninput="adjustInputHeight()"></textarea>
+            <button class="send-button" id="send-btn">
+                <img src="{% static 'img/send.png' %}" alt="Send Icon" class="send-icon">
+            </button>
+        </div>
+    </div>
+
+    <form id="submit-form" action="{% url 'results' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="conversation" id="conversation-data">
+        <button type="submit" class="submit-button">Submit Conversation</button>
+    </form>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const chatBox = document.getElementById("chatBox");
+            const userInput = document.getElementById("userInput");
+            const sendBtn = document.getElementById("send-btn");
+            const submitForm = document.getElementById("submit-form");
+            const conversationData = document.getElementById("conversation-data");
+
+            let conversation = [];
+
+            function appendMessage(sender, message) {
+                const messageDiv = document.createElement("div");
+                messageDiv.classList.add("chat-message", sender.toLowerCase());
+                messageDiv.textContent = message;  // Removed "User:" and "AI:"
+                chatBox.appendChild(messageDiv);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+
+            function sendMessage() {
+                const message = userInput.value.trim();
+                if (message) {
+                    appendMessage("User", message);
+                    conversation.push({ sender: "User", text: message });
+
+                    fetch("{% url 'ask' %}", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-CSRFToken": "{{ csrf_token }}"
+                        },
+                        body: JSON.stringify({ message: message, conversation: conversation })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        appendMessage("AI", data.response);
+                        conversation.push({ sender: "AI", text: data.response });
+                        conversationData.value = JSON.stringify(conversation);
+                    })
+                    .catch(error => console.error("Error:", error));
+
+                    userInput.value = "";
+                }
+            }
+
+            sendBtn.addEventListener("click", sendMessage);
+
+            // Allow sending message with Enter key
+            userInput.addEventListener("keydown", function (event) {
+                if (event.key === "Enter" && !event.shiftKey) {
+                    event.preventDefault(); // Prevents newline in textarea
+                    sendMessage();
+                }
+            });
+
+            // Ensure the entire conversation is submitted
+            submitForm.addEventListener("submit", function () {
+                conversationData.value = JSON.stringify(conversation);
+            });
+        });
+    </script>
+
+</body>
+</html>

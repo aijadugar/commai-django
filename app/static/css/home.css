@@ -1,0 +1,380 @@
+/* home.css */
+
+body {
+  font-family: Arial, sans-serif;
+  /* background-color: rgb(52, 50, 50);  */
+  /* background-color: rgb(33, 32, 32); */
+  margin: 0;
+  padding: 0;
+}
+
+
+.navbar {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+
+
+h1 {
+  text-align: center;
+  margin-top: 110px;
+  background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+  -webkit-background-clip: text;
+  color: transparent;
+  font-size: 80px;
+  position: relative;
+}
+
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 60px;
+  }
+
+  .feature-card {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 40px;
+  }
+
+  .feature-card {
+    margin-bottom: 20px;
+  }
+
+}
+
+.container p {
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: 20px;
+  color: #555;
+}
+
+.navbar {
+  position: relative;
+}
+
+.github {
+  position: absolute;
+  right: 15px;
+}
+
+@media(max-width:768px) {
+  .github {
+    position: absolute;
+    right: 50px;
+    top: 10px;
+  }
+}
+
+/*Medium size screens*/
+@media(max-width: 1024px) and(min-width:768px) {
+  .github {
+    right: 20px;
+    top: 15px;
+  }
+}
+
+nav {
+  position: fixed;
+  top: 0;
+}
+
+.nav-item {
+  font-size: 1rem;
+}
+
+.navbar-nav .nav-item a {
+  color: black;
+}
+
+.navbar-nav {
+  display: flex;
+  justify-content: center;
+  /* Horizontally centers the navbar items */
+  align-items: center;
+  /* Vertically centers the navbar items */
+}
+
+.navbar-nav li {
+  list-style: none;
+  /* Removes list bullets, if any */
+  padding: 0 15px;
+  /* Adds space between each item */
+}
+
+.navbar-nav a {
+  text-decoration: none;
+  /* Removes underline from links */
+  color: white;
+  /* Set color to white or any color you like */
+}
+
+
+.navbar-nav .nav-item a:hover {
+  color: black;
+}
+
+.navbar-nav .nav-item a:hover {
+  background-color: black;
+  color: white;
+}
+
+.dropdown-menu {
+  border: none;
+}
+
+.dropdown-item {
+  font-size: 1rem;
+}
+
+.dropdown-item:hover {
+  background-color: #e9ecef;
+}
+
+.github-icon {
+  height: 40px;
+  width: 40px;
+  margin-right: 20px;
+}
+
+.container {
+  margin-top: 50px;
+}
+
+/* General styling */
+.feature-card {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.feature-icon {
+  width: 60px;
+  height: 60px;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 15px;
+  background: linear-gradient(0deg, #008cff, #e100ff, #ffcc70, #4158d0, #008cff);
+  z-index: -1;
+  animation: gradient-border 3s linear infinite;
+  background-size: 400% 400%;
+}
+
+@keyframes gradient-border {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.feature-card {
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+}
+
+h3 {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+p {
+  font-size: 1rem;
+  color: #666;
+}
+
+/* For mobile responsiveness */
+@media (max-width: 768px) {
+  .feature-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+}
+
+.docs-btn {
+  display: flex;
+  justify-content: center;
+}
+
+.docs-btn button {
+  padding: 1em 2em;
+  background-color: #161a20;
+  border: none;
+  color: #f0f0f0;
+  /* font-family: 'Segoui UI'; */
+  position: relative;
+  border-radius: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.docs-btn button::after {
+  content: '';
+  position: absolute;
+  height: 107%;
+  width: 102%;
+  border-radius: 1000px;
+  background-image: linear-gradient(to bottom right, #008cff, #e100ff);
+  z-index: -1;
+}
+
+.docs-btn button:hover {
+  z-index: 0;
+  box-shadow: 40px 0 100px #008cff, -40px 0 100px #e100ff;
+}
+
+
+
+/* Container styling */
+.custom-section {
+  padding: 20px;
+  margin-bottom: 40px;
+}
+.custom-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.custom-heading {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+/* Accordion styling */
+.custom-accordion {
+  background: rgba(255, 255, 255, 0.8); /* transparent background */
+  border-radius: 10px; /* rounded corners */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+.custom-accordion-item {
+  border-bottom: 1px solid #ccc;
+}
+.custom-accordion-item:last-child {
+  border-bottom: none;
+}
+.custom-accordion-header {
+  padding: 15px;
+  cursor: pointer;
+  background-color: transparent;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+.custom-accordion-header:hover {
+  background-color: rgba(0,0,0,0.05);
+}
+.custom-accordion-body {
+  padding: 15px;
+  display: none;
+  background-color: transparent;
+}
+.custom-accordion-body.active {
+  display: block;
+}
+
+.accordion-button {
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: #212529 !important; /* Darker shade for open accordion */
+  color: white !important;
+}
+
+.accordion-button:focus {
+  box-shadow: none !important;
+}
+
+.accordion-body {
+  font-size: 1rem;
+}
+
+
+.why-commai-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 40px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.lhs {
+  flex: 0.3; /* Reduce size of left section */
+  text-align: left;
+}
+
+.lhs img {
+  max-width: 120px; /* Small image */
+  height: auto;
+  border-radius: 10px;
+}
+
+.rhs {
+  flex: 0.7; /* Increase text space */
+  padding-left: 20px;
+}
+
+.rhs h2 {
+  font-size: 24px;
+  color: #333;
+}
+
+.rhs p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.5;
+}

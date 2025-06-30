@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CommAI Documentation</title>
+    <style>
+      body {
+        font-family: "Georgia", serif;
+        background: #f8f9fa;
+        margin: 0;
+        padding: 0;
+      }
+      header {
+        background: linear-gradient(135deg, #e4b1c4, #b6e1f4);
+        padding: 15px;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+      }
+      .services-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        padding: 40px;
+        flex-wrap: wrap;
+      }
+      .service {
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        width: 320px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+      }
+      .service:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      }
+      .service-title {
+        color: #333;
+        font-size: 22px;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+      .read-more {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 10px 20px;
+        background: linear-gradient(135deg, #e4b1c4, #b6e1f4);
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background 0.3s ease;
+        border: none;
+        cursor: pointer;
+      }
+      .read-more:hover {
+        background: linear-gradient(135deg, #b6e1f4, #e4b1c4);
+      }
+      .documentation {
+        display: none;
+        background: white;
+        padding: 20px;
+        margin: 20px auto;
+        width: 80%;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        font-family: "Arial", sans-serif;
+        line-height: 1.6;
+      }
+      h2,
+      h3 {
+        color: #2c3e50;
+        font-weight: bold;
+      }
+
+      h2 {
+        font-size: 28px;
+        text-align: center;
+        border-bottom: 2px solid #2c3e50;
+        padding-bottom: 5px;
+        margin-bottom: 20px;
+      }
+
+      h3 {
+        font-size: 22px;
+        margin-top: 20px;
+      }
+
+      p {
+        font-size: 18px;
+        line-height: 1.6;
+        margin: 10px 0;
+      }
+
+      ul {
+        list-style-type: square;
+        padding-left: 20px;
+      }
+
+      ul li {
+        font-size: 18px;
+        margin-bottom: 8px;
+      }
+
+      strong {
+        color: #34495e;
+      }
+
+      code {
+        font-family: "Courier New", monospace;
+        background-color: #eee;
+        padding: 2px 6px;
+        border-radius: 4px;
+      }
+
+      button {
+        background-color: #2c3e50;
+        color: white;
+        font-size: 18px;
+        padding: 10px 15px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-top: 10px;
+      }
+
+      button:hover {
+        background-color: #1a252f;
+      }
+    </style>
+  </head>
+  <body>
+    <header>CommAI Documentation</header>
+    <main class="services-container">
+      <section class="service">
+        <h2 class="service-title">Text Interface</h2>
+        <p>Explore AI-powered text-based communication analysis.</p>
+        <button class="read-more" onclick="showDocumentation('text-doc')">
+          Read More
+        </button>
+      </section>
+      <section class="service">
+        <h2 class="service-title">Speech Interface</h2>
+        <p>
+          Learn about speech-to-text AI models and voice-based communication.
+        </p>
+        <button class="read-more" onclick="showDocumentation('speech-doc')">
+          Read More
+        </button>
+      </section>
+      <section class="service">
+        <h2 class="service-title">Daily Tasks</h2>
+        <p>Automate daily tasks using AI-powered workflows.</p>
+        <button class="read-more" onclick="showDocumentation('tasks-doc')">
+          Read More
+        </button>
+      </section>
+    </main>
+
+    <section id="text-doc" class="documentation">
+      <h2>Text Interface Documentation</h2>
+      <p>
+        The Text Interaction feature in CommAI allows users to engage in
+        conversations with an AI model, facilitating human communication
+        analysis and improvement.
+      </p>
+
+      <h3>1. Accessing the Text Interaction</h3>
+      <p>
+        Navigate to the <strong>Text Interaction</strong> option in the services
+        section of the navigation bar on the homepage.
+      </p>
+
+      <h3>2. Chat Interface & Functionality</h3>
+      <p>
+        The interface consists of a chat screen and a text area where users can
+        input messages. A send icon is located to the right of the textarea.
+        Clicking this icon sends the user's message to the chat screen and
+        interacts with the Gemini API for responses. The conversation continues
+        as long as the user wishes, allowing AI-powered communication.
+      </p>
+
+      <h3>3. Submitting Conversations for Analysis</h3>
+      <p>
+        At the bottom right, there is a
+        <strong>Submit Conversation</strong> button. Clicking this button
+        processes the entire conversation for detailed analysis.
+      </p>
+
+      <h3>4. Conversation Analysis Features</h3>
+      <p>
+        Once submitted, the system evaluates the conversation based on seven key
+        communication parameters:
+      </p>
+      <ul>
+        <li>Clarity Score</li>
+        <li>Conciseness Score</li>
+        <li>Tone & Sentiment Score</li>
+        <li>Engagement Score</li>
+        <li>Vocabulary Usage Score</li>
+        <li>Politeness Score</li>
+        <li>Grammar & Spelling Score</li>
+      </ul>
+      <p>
+        Each score is accompanied by improvement suggestions, making it easier
+        for users to refine their communication skills.
+      </p>
+
+      <h3>5. Error Detection</h3>
+      <p>
+        The system highlights errors found in the user's conversation, providing
+        correction suggestions in an interactive manner.
+      </p>
+
+      <h3>6. Facial Expression Analysis</h3>
+      <p>
+        Using CNN models built with TensorFlow and PyTorch, the system detects
+        real-time facial expressions throughout the conversation.
+      </p>
+
+      <h3>7. AI-Powered Conversation Summary</h3>
+      <p>
+        Leveraging pretrained models like BERT and T5 Tokenizer, the system
+        provides a concise summary of the entire conversation.
+      </p>
+
+      <h3>8. Conversation Level Classification</h3>
+      <p>
+        The user's communication skills are categorized as
+        <strong>Poor, Intermediate, or Expert</strong> based on the seven key
+        parameters.
+      </p>
+
+      <h3>9. Learning Resources</h3>
+      <p>
+        Depending on the user's level, a recommended improvement video is
+        displayed along with AI-selected courses. The system employs a TF-IDF
+        vectorizer and cosine similarity model to match user conversations with
+        relevant learning materials.
+      </p>
+
+      <h3>10. Final Actions</h3>
+      <ul>
+        <li>
+          <strong>Back to Home:</strong> Redirects the user to the CommAI
+          homepage.
+        </li>
+        <li>
+          <strong>Download PDF:</strong> Generates and saves a communication
+          progress report as <code>communication_progress_report.pdf</code>.
+        </li>
+      </ul>
+    </section>
+
+    <section id="speech-doc" class="documentation">
+      <h2>Speech Interface Documentation</h2>
+      <p>
+        The Speech Interaction feature in CommAI enables users to engage in
+        voice-based conversations with an AI model, facilitating human
+        communication analysis and improvement.
+      </p>
+
+      <h3>1. Accessing the Speech Interaction</h3>
+      <p>
+        Navigate to the <strong>Speech Interaction</strong> option in the
+        services section of the navigation bar on the homepage.
+      </p>
+
+      <h3>2. Voice Chat Interface & Functionality</h3>
+      <p>
+        The interface consists of a chat screen and a
+        <strong>microphone button</strong> that allows users to speak their
+        messages. Clicking this button activates the microphone, capturing the
+        user's speech. The spoken message is transcribed and sent to the chat
+        screen, where it interacts with the Gemini API for responses. The
+        conversation continues as long as the user wishes, enabling AI-powered
+        voice communication.
+      </p>
+
+      <h3>3. Submitting Conversations for Analysis</h3>
+      <p>
+        At the bottom right, there is a
+        <strong>Submit Conversation</strong> button. Clicking this button
+        processes the entire conversation for detailed analysis.
+      </p>
+
+      <h3>4. Conversation Analysis Features</h3>
+      <p>
+        Once submitted, the system evaluates the conversation based on seven key
+        communication parameters:
+      </p>
+      <ul>
+        <li>Clarity Score</li>
+        <li>Conciseness Score</li>
+        <li>Tone & Sentiment Score</li>
+        <li>Engagement Score</li>
+        <li>Vocabulary Usage Score</li>
+        <li>Politeness Score</li>
+        <li>Grammar & Pronunciation Score</li>
+      </ul>
+      <p>
+        Each score is accompanied by improvement suggestions, making it easier
+        for users to refine their communication skills.
+      </p>
+
+      <h3>5. Error Detection</h3>
+      <p>
+        The system highlights errors found in the user's speech, providing
+        correction suggestions interactively, including
+        <strong>mispronunciations and grammar errors</strong>.
+      </p>
+
+      <h3>6. Facial Expression Analysis</h3>
+      <p>
+        Using CNN models built with TensorFlow and PyTorch, the system detects
+        real-time facial expressions throughout the conversation.
+      </p>
+
+      <h3>7. AI-Powered Conversation Summary</h3>
+      <p>
+        Leveraging pretrained models like BERT and T5 Tokenizer, the system
+        provides a concise summary of the entire conversation.
+      </p>
+
+      <h3>8. Conversation Level Classification</h3>
+      <p>
+        The user's communication skills are categorized as
+        <strong>Poor, Intermediate, or Expert</strong> based on the seven key
+        parameters.
+      </p>
+
+      <h3>9. Learning Resources</h3>
+      <p>
+        Depending on the user's level, a recommended improvement video is
+        displayed along with AI-selected courses. The system employs a TF-IDF
+        vectorizer and cosine similarity model to match user conversations with
+        relevant learning materials.
+      </p>
+
+      <h3>10. Final Actions</h3>
+      <ul>
+        <li>
+          <strong>Back to Home:</strong> Redirects the user to the CommAI
+          homepage.
+        </li>
+        <li>
+          <strong>Download PDF:</strong> Generates and saves a communication
+          progress report as <code>communication_progress_report.pdf</code>.
+        </li>
+      </ul>
+    </section>
+
+    <section id="tasks-doc" class="documentation">
+      <h2>Daily Tasks Documentation</h2>
+      <p>
+        The Daily Tasks feature in CommAI helps users enhance their
+        communication skills through structured daily exercises and AI-powered
+        feedback.
+      </p>
+
+      <h3>1. Accessing Daily Tasks</h3>
+      <p>
+        Navigate to the <strong>Daily Tasks</strong> option in the services
+        section of the navigation bar on the homepage.
+      </p>
+
+      <h3>2. Task Interface & Functionality</h3>
+      <p>
+        The interface displays a list of daily exercises that users can
+        complete. Each task consists of either a
+        <strong>text-based writing prompt</strong> or a
+        <strong>speech-based challenge</strong>. Users can type their responses
+        in the text area or use the microphone to submit voice responses,
+        depending on the task type.
+      </p>
+
+      <h3>3. Submitting Tasks for Analysis</h3>
+      <p>
+        Once a task is completed, users can click the
+        <strong>Submit Task</strong> button to process their response for
+        detailed evaluation.
+      </p>
+
+      <h3>4. Task Analysis Features</h3>
+      <p>
+        After submission, the system evaluates the response based on seven key
+        communication parameters:
+      </p>
+      <ul>
+        <li>Clarity Score</li>
+        <li>Conciseness Score</li>
+        <li>Tone & Sentiment Score</li>
+        <li>Engagement Score</li>
+        <li>Vocabulary Usage Score</li>
+        <li>Politeness Score</li>
+        <li>
+          Grammar & Spelling Score (for text) / Grammar & Pronunciation Score
+          (for speech)
+        </li>
+      </ul>
+      <p>
+        Each score is accompanied by improvement suggestions to help users
+        refine their communication skills.
+      </p>
+
+      <h3>5. Error Detection</h3>
+      <p>
+        The system highlights mistakes in the user's response, providing
+        corrections for
+        <strong>grammar, spelling, pronunciation, and structure</strong>.
+      </p>
+
+      <h3>6. Facial Expression Analysis (for Speech Tasks)</h3>
+      <p>
+        For speech-based tasks, the system detects real-time facial expressions
+        using CNN models built with TensorFlow and PyTorch, ensuring expressive
+        and engaging communication.
+      </p>
+
+      <h3>7. AI-Powered Task Summary</h3>
+      <p>
+        Utilizing pretrained models like BERT and T5 Tokenizer, the system
+        generates a concise summary of the user's response.
+      </p>
+
+      <h3>8. Performance Level Classification</h3>
+      <p>
+        Users are categorized into
+        <strong>Poor, Intermediate, or Expert</strong> levels based on their
+        performance in the completed task.
+      </p>
+
+      <h3>9. Learning Resources</h3>
+      <p>
+        Based on the user's performance, a recommended improvement video is
+        displayed along with AI-selected courses. The system employs a TF-IDF
+        vectorizer and cosine similarity model to match the user's response with
+        relevant learning materials.
+      </p>
+
+      <h3>10. Final Actions</h3>
+      <ul>
+        <li>
+          <strong>Back to Home:</strong> Redirects the user to the CommAI
+          homepage.
+        </li>
+        <li>
+          <strong>Download PDF:</strong> Generates and saves a progress report
+          as <code>daily_task_report.pdf</code>.
+        </li>
+      </ul>
+    </section>
+
+    <script>
+      function showDocumentation(id) {
+        document.querySelectorAll(".documentation").forEach((doc) => {
+          doc.style.display = "none";
+        });
+        document.getElementById(id).style.display = "block";
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+[
+    {
+        "sender": "User",
+        "text": "hi"
+    },
+    {
+        "sender": "AI",
+        "text": "Hi there! How can I help you today?"
+    },
+    {
+        "sender": "User",
+        "text": "my name is ankit"
+    },
+    {
+        "sender": "AI",
+        "text": "It's nice to meet you, Ankit!"
+    },
+    {
+        "sender": "User",
+        "text": "tell abou me"
+    },
+    {
+        "sender": "AI",
+        "text": "I don't know anything about you!  I have no memory of past conversations and I'm a large language model, not a person. To tell you about *you*, I need information from you.  Tell me about yourself \u2013 what are your interests, your hobbies, your job, your personality?  The more you tell me, the better I can \"tell you about you.\""
+    }
+]

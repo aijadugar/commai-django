@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+
+<!-- GIF logo tikde to square round shaped kar... -->
+<!-- how works madhe ekdam white nako... -->
+<!-- classical footer add karu aapan me deto... -->
+<!-- https://github.com/aijadugar/Code-dot/tree/main/classic_footer -->
+
+
+
+<!-- new feature: first home page disayla pahije...  -->
+<!-- new option: Why CommAI? add karaycha aani popup description dakhvaych... -->
+<!-- Log in    lavaycha aani mag services access dyaych...  -->
+
+
+<!-- Documentation mi hardcode karto...nantar tu parat finalize kar...  -->
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Commai - Home</title>
+    <!-- Loading static files in Django -->
+    {% load static %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Corrected path to CSS using Django static tag -->
+
+    <link rel="stylesheet" href="{% static 'css/home.css' %}?v={{ version }}">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-dark">
+
+    {% include 'layouts/header.html' %}
+
+    <div class="container mt-5 mb-5">
+        <h1>Welcome to CommAI</h1>
+
+        <div class="docs-btn">
+            <a href = {% url 'documentation' %} target = "_blank">
+                <button>Read Docs</button>
+            </a>
+        </div>
+
+        <p><i>Enhancing Communication, Empowering Connections</i></p>
+        <p><i>Explore our text and speech interaction tools, daily task management solutions, and insightful
+                assessments
+                to transform the way you communicate.</i></p>
+    </div>
+
+
+
+    <div class="container my-5">
+        <h2 class="text-center mb-4 text-light">Our Features</h2>
+        <div class="row mb-5">
+            <!-- Feature 1: Text Interaction -->
+            <div class="col-md-4 text-center">
+                <div class="feature-card p-4 bg-primary">
+                    <i class="fas fa-pencil-alt fa-3x mb-3 text-primary"></i>
+                    <h3>Text Interaction</h3>
+                    <p>Analyze and enhance your writing for clarity, tone, grammar, and style effectiveness.</p>
+                </div>
+            </div>
+            <!-- Feature 2: Speech Interaction -->
+            <div class="col-md-4 text-center">
+                <div class="feature-card p-4 bg-success">
+                    <i class="fas fa-microphone fa-3x mb-3 text-dark"></i>
+                    <h3>Speech Interaction</h3>
+                    <p>Practice and improve your speaking skills with instant feedback and personalized suggestions.
+                    </p>
+                </div>
+            </div>
+            <!-- Feature 3: Daily Tasks -->
+            <div class="col-md-4 text-center">
+                <div class="feature-card p-4 bg-warning">
+                    <i class="fas fa-tasks fa-3x mb-3 text-info"></i>
+                    <h3>Various Activities</h3>
+                    <p>Engage in timed activities to improve communication, fluency, confidence, and overall
+                        effectiveness.</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <!-- Feature 1: Error Detection -->
+            <div class="col-md-4 text-center">
+                <div class="feature-card p-4">
+                    <i class="fas fa-spell-check fa-3x mb-3 text-warning"></i>
+                    <h3>Error Detection</h3>
+                    <p>Identify and correct misspelled words or incorrectly written text, ensuring your
+                        communication is clear and error-free.</p>
+                </div>
+            </div>
+            <!-- Feature 2: View Your Results -->
+            <div class="col-md-4 text-center">
+                <div class="feature-card p-4">
+                    <i class="fas fa-microscope fa-3x mb-3 text-success"></i>
+                    <h3>View Results</h3>
+                    <p>Get detailed insights into your communication performance, highlighting areas for your
+                        improvement.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Feature 3: Learn and Improve -->
+            <div class="col-md-4 text-center">
+                <div class="feature-card p-4">
+                    <i class="fas fa-video fa-3x mb-3 text-danger"></i>
+                    <h3>Learn and Improve</h3>
+                    <p>Access curated videos to enhance your communication skills, focusing on clarity, confidence,
+                        and effectiveness.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="why-commai-container">
+        <div class="lhs">
+            <img src="{% static '/img/download.png' %}" alt="CommAI Image">
+        </div>
+        <div class="rhs">
+            <h2>Why CommAI?</h2>
+            <p>CommAI is designed to analyze human communication skills through text and speech, offering insights into grammar, clarity, and engagement. It helps users improve their communication by providing constructive feedback and interactive learning resources.</p>
+        </div>
+    </div>
+
+    <section class="how-it-works py-1 mb-5">
+        <div class="container">
+            <h2 class="text-center mb-4 text-white">How our CommAI Works?</h2>
+            <div class="accordion rounded-4 p-3 shadow-lg bg-transparent border border-light" id="howItWorksAccordion">
+                <div class="accordion-item border-0 bg-transparent">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button rounded-3 bg-dark text-white shadow-sm" type="button" 
+                            data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Analyze Your Text
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                        data-bs-parent="#howItWorksAccordion">
+                        <div class="accordion-body text-light bg-dark bg-opacity-75 rounded-bottom-3 border border-light">
+                            Submit your text to get analysis and suggestions to improve clarity, tone, and grammar.
+                        </div>
+                    </div>
+                </div>
+                <hr class="border-light mx-3"> <!-- Border Between Questions -->
+                <div class="accordion-item border-0 bg-transparent">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed rounded-3 bg-dark text-white shadow-sm" type="button" 
+                            data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Practice Text and Speech
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                        data-bs-parent="#howItWorksAccordion">
+                        <div class="accordion-body text-light bg-dark bg-opacity-75 rounded-bottom-3 border border-light">
+                            Try our various texting and speaking features on different topics and receive instant
+                            feedback to improve your speech.
+                        </div>
+                    </div>
+                </div>
+                <hr class="border-light mx-3"> <!-- Border Between Questions -->
+                <div class="accordion-item border-0 bg-transparent">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed rounded-3 bg-dark text-white shadow-sm" type="button" 
+                            data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Track Your Progress
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                        data-bs-parent="#howItWorksAccordion">
+                        <div class="accordion-body text-light bg-dark bg-opacity-75 rounded-bottom-3 border border-light">
+                            Monitor your progress over time with detailed reports and insights on your communication improvements.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    {% include 'layouts/footer.html' %}
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

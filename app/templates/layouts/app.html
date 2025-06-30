@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Django Auth</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Load static files -->
+  {% load static %}
+
+  <!-- Default CSS (if needed) -->
+  <link rel="stylesheet" href="{% static 'css/register.css' %}?v={{ version }}">
+
+  <!-- Add Font Awesome CDN link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <script src="{% static 'js/register.js' %}?v={{ version }}"></script>
+
+  <!-- Allow page-specific styles -->
+  {% block extra_css %}
+  <!-- Additional CSS files can be included here -->
+  {% endblock %}
+</head>
+<body>
+
+{% block content %}
+<!-- Page content goes here -->
+<div class="container">
+  <!-- Form goes here -->
+</div>
+{% endblock %}
+
+
+</body>
+</html>
