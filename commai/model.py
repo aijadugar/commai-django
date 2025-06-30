@@ -151,7 +151,7 @@ def recommend_courses(user_text):
 
 import google.generativeai as genai
 
-G_API_KEY = "AIzaSyC1l9rED1nJeliRvS3LtWD3IxfC_Goue0E"  # Replace with a secure method to load API key
+G_API_KEY = "api-key-here"  # Replace with a secure method to load API key
 genai.configure(api_key=G_API_KEY)
 
 model = genai.GenerativeModel("gemini-1.5-flash-latest")
