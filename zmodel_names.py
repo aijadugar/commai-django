@@ -1,7 +1,7 @@
 import google.generativeai as genai
 
 # Set API Key
-G_API_KEY = "AIzaSyC1l9rED1nJeliRvS3LtWD3IxfC_Goue0E"
+G_API_KEY = "api-key-here"
 genai.configure(api_key=G_API_KEY)
 
 # List Available Models
