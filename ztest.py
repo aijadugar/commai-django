@@ -1,11 +1,13 @@
 import pathlib
 import textwrap
-
+from dotenv import load_dotenv
+load_dotenv()
+import os
 import google.generativeai as genai
 
-model = genai.GenerativeModel('gemini-1.5-pro-latest')
+model = genai.GenerativeModel('models/gemini-2.5-flash-lite')
 
-G_API_KEY = 'api-key-here'
+G_API_KEY = os.environ.get('GEMINI_API')
 
 genai.configure(api_key = G_API_KEY)
 

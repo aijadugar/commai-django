@@ -3,7 +3,7 @@ from . import views
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('aijadugar/', admin.site.urls),
     path('', include('app.urls')),  # Now correctly includes login view and auth paths from 'app.urls'
     
     path('ask', views.ask, name = 'ask'),

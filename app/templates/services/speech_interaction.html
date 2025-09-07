@@ -1,9 +1,9 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Speech Interface</title>
-    {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}?v={{ version }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
@@ -12,18 +12,108 @@
     <div class="header">
         <h1 class="strong-heading">Comm AI</h1>
     </div>
+
     <div class="chat-container">
         <div class="chat-box" id="chatBox">
             <!-- Chat messages will be appended here -->
         </div>
     </div>
+
     <button class="speech-button" id="pulse" onclick="startRecognition()">
         <i class="fa-solid fa-microphone-slash" id="mic-icon"></i>
     </button>
-    
-    <button class="submit-button" onclick="submitConversation()">Submit Conversation</button>
 
-    <script src="{% static 'js/main.js' %}"></script>
+    <!-- Hidden form for conversation submission -->
+    <form id="submit-form" action="{% url 'results' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="conversation" id="conversation-data">
+        <button type="submit" class="submit-button">Submit Conversation</button>
+    </form>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const chatBox = document.getElementById("chatBox");
+            const conversationData = document.getElementById("conversation-data");
+            const submitForm = document.getElementById("submit-form");
+
+            let conversation = [];
+
+            // Append message to chat UI
+            function appendMessage(sender, message) {
+                const messageDiv = document.createElement("div");
+                messageDiv.classList.add("chat-message", sender.toLowerCase());
+                messageDiv.textContent = message;
+                chatBox.appendChild(messageDiv);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+
+            // Handle recognized speech text
+            function handleSpeechResult(text) {
+                if (!text.trim()) return;
+
+                // Add user message
+                appendMessage("User", text);
+                conversation.push({ sender: "User", text: text });
+
+                // Send to backend
+                fetch("{% url 'ask' %}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": "{{ csrf_token }}"
+                    },
+                    body: JSON.stringify({ message: text, conversation: conversation })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Add AI response
+                    appendMessage("AI", data.response);
+                    conversation.push({ sender: "AI", text: data.response });
+
+                    // Keep hidden input updated
+                    conversationData.value = JSON.stringify(conversation);
+                })
+                .catch(error => console.error("Error:", error));
+            }
+
+            // Update hidden input on form submit
+            submitForm.addEventListener("submit", function () {
+                conversationData.value = JSON.stringify(conversation);
+            });
+
+            // Expose function globally so speech recognition script can call it
+            window.handleSpeechResult = handleSpeechResult;
+        });
+
+        // Speech recognition function
+        function startRecognition() {
+            const micIcon = document.getElementById("mic-icon");
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = "en-US";
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            recognition.onstart = () => {
+                micIcon.classList.remove("fa-microphone-slash");
+                micIcon.classList.add("fa-microphone");
+            };
+
+            recognition.onresult = (event) => {
+                const text = event.results[0][0].transcript;
+                window.handleSpeechResult(text);
+            };
+
+            recognition.onerror = (event) => {
+                console.error("Speech recognition error:", event.error);
+            };
+
+            recognition.onend = () => {
+                micIcon.classList.remove("fa-microphone");
+                micIcon.classList.add("fa-microphone-slash");
+            };
+
+            recognition.start();
+        }
+    </script>
 </body>
-
 </html>

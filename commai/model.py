@@ -45,6 +45,8 @@
 #     print(obj.get_grammar_errors(message))  # Calling the grammar error extraction function
 
 
+import os
+from commai.settings import BASE_DIR
 from transformers import T5Tokenizer, T5ForConditionalGeneration
 import torch
 import torchvision.transforms as transforms
@@ -54,12 +56,16 @@ import torch.nn.functional as F
 from sklearn.metrics.pairwise import cosine_similarity
 import pickle
 import pandas as pd
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+MODELS_DIR = BASE_DIR / 'models'
 
 # For AI Summarizer
 
-model_path = "commai/intelligence/commai_summarizer_latest"
-models = T5ForConditionalGeneration.from_pretrained(model_path)
-tokenizer = T5Tokenizer.from_pretrained(model_path)
+# model_path = "commai/intelligence/commai_summarizer_latest"
+# models = T5ForConditionalGeneration.from_pretrained(model_path)
+# tokenizer = T5Tokenizer.from_pretrained(model_path)
 
 def commai_summary(text):
     input_text = "summarize: " + text
@@ -77,7 +83,6 @@ def commai_summary(text):
     )
     
     return tokenizer.decode(output_ids[0], skip_special_tokens=True).strip()
-
 
 
 # For Emotion detection
@@ -105,7 +110,7 @@ class EmotionCNN(nn.Module):
 
 # Load model
 model = EmotionCNN()
-model.load_state_dict(torch.load(r"C:\Users\Admin\OneDrive\Desktop\commai-django\commai\intelligence\emotion_cnn.pth"))
+model.load_state_dict(torch.load(MODELS_DIR / "emotion_cnn.pth"))
 model.eval()
 
 transform = transforms.Compose([
@@ -131,30 +136,31 @@ def predict_emotion(image_path, model=model):
 
 
 # For Courses Recommender
-with open(r'C:\Users\Admin\OneDrive\Desktop\commai-django\commai\intelligence\vectorizer.pkl', 'rb') as f:
+
+with open(MODELS_DIR / 'vectorizer.pkl', 'rb') as f:
     main_vectorizer = pickle.load(f)
     
-with open(r'C:\Users\Admin\OneDrive\Desktop\commai-django\commai\intelligence\course_tfidf.pkl', 'rb') as f:
+with open(MODELS_DIR / 'course_tfidf.pkl', 'rb') as f:
     course_vector = pickle.load(f)
-    
 
-preprocessed_courses = pd.read_csv(r'C:\Users\Admin\OneDrive\Desktop\commai-django\commai\intelligence\proprocessed_courses.csv')
+preprocessed_courses = pd.read_csv(MODELS_DIR / 'proprocessed_courses.csv')
 
 def recommend_courses(user_text):
     user_text = user_text.lower()
     user_vector = main_vectorizer.transform([user_text])
     cos_sim = cosine_similarity(user_vector, course_vector)
     top_indices = cos_sim.argsort()[0][-5:][::-1]
-    return preprocessed_courses.iloc[top_indices][['Title', 'URL', 'Short_Intro']]
+    return preprocessed_courses.iloc[top_indices][['Title', 'URL', 'ShortIntro']]
 
 
 
 import google.generativeai as genai
-
-G_API_KEY = "api-key-here"  # Replace with a secure method to load API key
+from dotenv import load_dotenv
+load_dotenv()  # Load environment variables from.env file
+G_API_KEY = os.environ.get('GEMINI_API')  # Replace with a secure method to load API key
 genai.configure(api_key=G_API_KEY)
 
-model = genai.GenerativeModel("gemini-1.5-flash-latest")
+model = genai.GenerativeModel("models/gemini-2.5-flash-lite")
 
 def commai_summarys(text):
     """CommAI's summary generator using Gemini API"""

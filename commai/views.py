@@ -1,3 +1,4 @@
+from commai.settings import BASE_DIR
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from app.middlewares import auth, guest
@@ -11,13 +12,15 @@ from app.middlewares import auth, guest
 from commai.intelligence.evaluation_parameters import evaluate_text
 from commai.intelligence.grammer_spelling import evaluate_grammer_spelling
 from commai.intelligence.level_selector import select_level
-from .model import commai_summarys, predict_emotion, recommend_courses
+from .model import MODELS_DIR, commai_summarys, predict_emotion, recommend_courses
 
 from app import views
 
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 import google.generativeai as genai
 from django.views.decorators.csrf import csrf_exempt
+from dotenv import load_dotenv
+load_dotenv()
 import json
 import logging
 
@@ -26,6 +29,9 @@ from django import template
 from django.contrib import messages
 
 # spell_checker_module=SpellCheckerModule()
+from pathlib import Path
+BASE_DIR = Path(__file__).resolve().parent.parent
+MODELS_DIR = BASE_DIR / 'models'
 
 register = template.Library()
 
@@ -81,7 +87,7 @@ def results(request):
     grammer_spelling = evaluate_grammer_spelling(user_text)
     level = select_level(user_text)
     summary = commai_summarys(user_text)
-    emotion = predict_emotion(r"C:\Users\Admin\OneDrive\Desktop\commai-django\commai\intelligence\DATASET\train\7\train_09753_aligned.jpg")
+    emotion = predict_emotion(image_path= MODELS_DIR / '1644.jpg')
     courses = recommend_courses(user_text).to_dict(orient='records')
     # print(evaluation)
     # print(grammer_spelling)
@@ -123,11 +129,11 @@ def submit_conversation(request):
 logger = logging.getLogger(__name__)
 
 # Set API Key
-G_API_KEY = "api-key-here"
+G_API_KEY = os.environ.get('GEMINI_API')
 genai.configure(api_key=G_API_KEY)
 
 # Use a stable Gemini model
-model = genai.GenerativeModel("gemini-1.5-flash-latest")
+model = genai.GenerativeModel("models/gemini-2.5-flash-lite")
 
 @csrf_exempt
 def ask(request):
