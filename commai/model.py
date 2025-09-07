@@ -47,12 +47,12 @@
 
 import os
 from commai.settings import BASE_DIR
-from transformers import T5Tokenizer, T5ForConditionalGeneration
-import torch
-import torchvision.transforms as transforms
-from PIL import Image
-import torch.nn as nn
-import torch.nn.functional as F
+# from transformers import T5Tokenizer, T5ForConditionalGeneration
+# import torch
+# import torchvision.transforms as transforms
+# from PIL import Image
+# import torch.nn as nn
+# import torch.nn.functional as F
 from sklearn.metrics.pairwise import cosine_similarity
 import pickle
 import pandas as pd
@@ -87,52 +87,52 @@ def commai_summary(text):
 
 # For Emotion detection
 
-class EmotionCNN(nn.Module):
-    def __init__(self):
-        super(EmotionCNN, self).__init__()
-        self.conv1 = nn.Conv2d(1, 32, kernel_size=3, padding=1)
-        self.conv2 = nn.Conv2d(32, 64, kernel_size=3, padding=1)
-        self.conv3 = nn.Conv2d(64, 128, kernel_size=3, padding=1)
-        self.fc1 = nn.Linear(128 * 6 * 6, 256)
-        self.fc2 = nn.Linear(256, 7)  # 7 classes
+# class EmotionCNN(nn.Module):
+#     def __init__(self):
+#         super(EmotionCNN, self).__init__()
+#         self.conv1 = nn.Conv2d(1, 32, kernel_size=3, padding=1)
+#         self.conv2 = nn.Conv2d(32, 64, kernel_size=3, padding=1)
+#         self.conv3 = nn.Conv2d(64, 128, kernel_size=3, padding=1)
+#         self.fc1 = nn.Linear(128 * 6 * 6, 256)
+#         self.fc2 = nn.Linear(256, 7)  # 7 classes
 
-    def forward(self, x):
-        x = F.relu(self.conv1(x))
-        x = F.max_pool2d(x, 2)
-        x = F.relu(self.conv2(x))
-        x = F.max_pool2d(x, 2)
-        x = F.relu(self.conv3(x))
-        x = F.max_pool2d(x, 2)
-        x = x.view(-1, 128 * 6 * 6)
-        x = F.relu(self.fc1(x))
-        x = self.fc2(x)
-        return x
+#     def forward(self, x):
+#         x = F.relu(self.conv1(x))
+#         x = F.max_pool2d(x, 2)
+#         x = F.relu(self.conv2(x))
+#         x = F.max_pool2d(x, 2)
+#         x = F.relu(self.conv3(x))
+#         x = F.max_pool2d(x, 2)
+#         x = x.view(-1, 128 * 6 * 6)
+#         x = F.relu(self.fc1(x))
+#         x = self.fc2(x)
+#         return x
 
-# Load model
-model = EmotionCNN()
-model.load_state_dict(torch.load(MODELS_DIR / "emotion_cnn.pth"))
-model.eval()
+# # Load model
+# model = EmotionCNN()
+# model.load_state_dict(torch.load(MODELS_DIR / "emotion_cnn.pth"))
+# model.eval()
 
-transform = transforms.Compose([
-    transforms.Grayscale(num_output_channels=1),  # Convert to grayscale
-    transforms.Resize((48, 48)),  # Resize to match training input
-    transforms.ToTensor(),  # Convert to tensor
-    transforms.Normalize(mean=[0.5], std=[0.5])  # Normalize
-])
+# transform = transforms.Compose([
+#     transforms.Grayscale(num_output_channels=1),  # Convert to grayscale
+#     transforms.Resize((48, 48)),  # Resize to match training input
+#     transforms.ToTensor(),  # Convert to tensor
+#     transforms.Normalize(mean=[0.5], std=[0.5])  # Normalize
+# ])
 
-def preprocess_image(image_path):
-    image = Image.open(image_path).convert("L")  # Convert to grayscale
-    image = transform(image)  # Apply transformations
-    image = image.unsqueeze(0)  # Add batch dimension
-    return image
+# def preprocess_image(image_path):
+#     image = Image.open(image_path).convert("L")  # Convert to grayscale
+#     image = transform(image)  # Apply transformations
+#     image = image.unsqueeze(0)  # Add batch dimension
+#     return image
 
-def predict_emotion(image_path, model=model):
-    image = preprocess_image(image_path)
-    with torch.no_grad():
-        output = model(image)
-        predicted_class = torch.argmax(output, dim=1).item()
-        class_mapping = {0: "Surprised", 1: "Fear", 2: "Disgust", 3: "Happy", 4: "Sad", 5: "Angry", 6: "Neutral"}
-    return class_mapping[predicted_class]
+# def predict_emotion(image_path, model=model):
+#     image = preprocess_image(image_path)
+#     with torch.no_grad():
+#         output = model(image)
+#         predicted_class = torch.argmax(output, dim=1).item()
+#         class_mapping = {0: "Surprised", 1: "Fear", 2: "Disgust", 3: "Happy", 4: "Sad", 5: "Angry", 6: "Neutral"}
+#     return class_mapping[predicted_class]
 
 
 # For Courses Recommender

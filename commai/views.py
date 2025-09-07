@@ -12,7 +12,7 @@ from app.middlewares import auth, guest
 from commai.intelligence.evaluation_parameters import evaluate_text
 from commai.intelligence.grammer_spelling import evaluate_grammer_spelling
 from commai.intelligence.level_selector import select_level
-from .model import MODELS_DIR, commai_summarys, predict_emotion, recommend_courses
+from .model import MODELS_DIR, commai_summarys, recommend_courses #predict_emotion, 
 
 from app import views
 
@@ -87,7 +87,7 @@ def results(request):
     grammer_spelling = evaluate_grammer_spelling(user_text)
     level = select_level(user_text)
     summary = commai_summarys(user_text)
-    emotion = predict_emotion(image_path= MODELS_DIR / '1644.jpg')
+    emotion = "Happy" #predict_emotion(image_path= MODELS_DIR / '1644.jpg')
     courses = recommend_courses(user_text).to_dict(orient='records')
     # print(evaluation)
     # print(grammer_spelling)

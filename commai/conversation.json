@@ -5,7 +5,7 @@
     },
     {
         "sender": "AI",
-        "text": "Hello there! How can I help you today?"
+        "text": "Hello! How can I help you today?"
     },
     {
         "sender": "User",
@@ -13,6 +13,6 @@
     },
     {
         "sender": "AI",
-        "text": "Hello there! How can I help you today? \ud83d\ude0a"
+        "text": "Hello there! How can I help you today?"
     }
 ]
