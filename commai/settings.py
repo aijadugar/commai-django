@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-s2_2h$*smi1-awdl2@-i^38=q9e(&()c4)7e^^polfdrfnyhh1'
-ELEVENLABS_API_KEY = os.getenv(ELEVENLABS_API_KEY)
+ELEVENLABS_API_KEY = os.getenv('ELEVENLABS_API_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
