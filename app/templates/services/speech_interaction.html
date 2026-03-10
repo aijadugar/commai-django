@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Speech Interface</title>
@@ -64,16 +65,16 @@
                     },
                     body: JSON.stringify({ message: text, conversation: conversation })
                 })
-                .then(response => response.json())
-                .then(data => {
-                    // Add AI response
-                    appendMessage("AI", data.response);
-                    conversation.push({ sender: "AI", text: data.response });
+                    .then(response => response.json())
+                    .then(data => {
+                        // Add AI response
+                        appendMessage("AI", data.response);
+                        conversation.push({ sender: "AI", text: data.response });
 
-                    // Keep hidden input updated
-                    conversationData.value = JSON.stringify(conversation);
-                })
-                .catch(error => console.error("Error:", error));
+                        // Keep hidden input updated
+                        conversationData.value = JSON.stringify(conversation);
+                    })
+                    .catch(error => console.error("Error:", error));
             }
 
             // Update hidden input on form submit
@@ -85,35 +86,189 @@
             window.handleSpeechResult = handleSpeechResult;
         });
 
-        // Speech recognition function
-        function startRecognition() {
+        // ================================
+        // ElevenLabs Realtime Speech STT
+        // ================================
+
+        let ws = null;
+        let audioContext = null;
+        let processor = null;
+        let input = null;
+
+        async function startRecognition() {
+
             const micIcon = document.getElementById("mic-icon");
-            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-            recognition.lang = "en-US";
-            recognition.interimResults = false;
-            recognition.maxAlternatives = 1;
 
-            recognition.onstart = () => {
-                micIcon.classList.remove("fa-microphone-slash");
-                micIcon.classList.add("fa-microphone");
-            };
+            micIcon.classList.remove("fa-microphone-slash");
+            micIcon.classList.add("fa-microphone");
 
-            recognition.onresult = (event) => {
-                const text = event.results[0][0].transcript;
-                window.handleSpeechResult(text);
-            };
+            try {
 
-            recognition.onerror = (event) => {
-                console.error("Speech recognition error:", event.error);
-            };
+                // get temporary token from backend
+                const response = await fetch("/elevenlabs_token/");
+                const tokenData = await response.json();
+                const token = tokenData.token;
 
-            recognition.onend = () => {
-                micIcon.classList.remove("fa-microphone");
-                micIcon.classList.add("fa-microphone-slash");
-            };
+                if (!token) {
+                    console.error("No ElevenLabs token received");
+                    return;
+                }
 
-            recognition.start();
+                // create websocket
+                ws = new WebSocket(
+                    `wss://api.elevenlabs.io/v1/speech-to-text/realtime?token=${token}&model_id=scribe_v2_realtime`
+                );
+
+                // ==========================
+                // OPEN CONNECTION
+                // ==========================
+                ws.onopen = async () => {
+
+                    console.log("Connected to ElevenLabs STT");
+
+                    // get microphone
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+
+                    audioContext = new AudioContext({ sampleRate: 16000 });
+
+                    input = audioContext.createMediaStreamSource(stream);
+
+                    processor = audioContext.createScriptProcessor(2048, 1, 1);
+
+                    processor.onaudioprocess = (event) => {
+
+                        if (!ws || ws.readyState !== WebSocket.OPEN) return;
+
+                        const pcmData = event.inputBuffer.getChannelData(0);
+
+                        const int16Buffer = convertFloat32ToInt16(pcmData);
+
+                        const base64Audio = arrayBufferToBase64(int16Buffer.buffer);
+
+                        ws.send(JSON.stringify({
+                            message_type: "input_audio_buffer.append",
+                            audio_base64: base64Audio
+                        }));
+                    };
+
+                    input.connect(processor);
+                    processor.connect(audioContext.createGain());
+                };
+
+                // ==========================
+                // RECEIVE TRANSCRIPT
+                // ==========================
+                ws.onmessage = (event) => {
+
+                    const data = JSON.parse(event.data);
+
+                    if (data.message_type === "transcript_partial") {
+                        console.log("Partial:", data.text);
+                    }
+
+                    if (data.message_type === "transcript_final") {
+                        console.log("Final:", data.text);
+
+                        if (window.handleSpeechResult) {
+                            window.handleSpeechResult(data.text);
+                        }
+                    }
+
+                    console.log("WS message:", data);
+                };
+
+                // ==========================
+                // ERROR
+                // ==========================
+                ws.onerror = (err) => {
+                    console.error("STT WebSocket error:", err);
+                };
+
+                // ==========================
+                // CLOSED
+                // ==========================
+                ws.onclose = (event) => {
+
+                    console.log("STT connection closed", event);
+
+                    micIcon.classList.remove("fa-microphone");
+                    micIcon.classList.add("fa-microphone-slash");
+
+                    stopRecognition();
+                };
+
+            } catch (err) {
+                console.error("STT startup error:", err);
+            }
         }
+
+
+        // ================================
+        // STOP RECOGNITION
+        // ================================
+        function stopRecognition() {
+
+            if (processor) {
+                processor.disconnect();
+                processor = null;
+            }
+
+            if (input) {
+                input.disconnect();
+                input = null;
+            }
+
+            if (audioContext) {
+                audioContext.close();
+                audioContext = null;
+            }
+
+            if (ws && ws.readyState === WebSocket.OPEN) {
+
+                ws.send(JSON.stringify({
+                    message_type: "input_audio_buffer.commit"
+                }));
+
+                ws.close();
+            }
+
+            ws = null;
+        }
+
+
+        // ================================
+        // FLOAT → INT16 CONVERSION
+        // ================================
+        function convertFloat32ToInt16(buffer) {
+
+            const l = buffer.length;
+            const buf = new Int16Array(l);
+
+            for (let i = 0; i < l; i++) {
+                buf[i] = Math.min(1, buffer[i]) * 0x7fff;
+            }
+
+            return buf;
+        }
+
+
+        // ================================
+        // ARRAYBUFFER → BASE64
+        // ================================
+        function arrayBufferToBase64(buffer) {
+
+            let binary = "";
+            const bytes = new Uint8Array(buffer);
+            const len = bytes.byteLength;
+
+            for (let i = 0; i < len; i++) {
+                binary += String.fromCharCode(bytes[i]);
+            }
+
+            return btoa(binary);
+        }
+    
     </script>
 </body>
+
 </html>

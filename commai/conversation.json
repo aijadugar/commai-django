@@ -1,18 +1,10 @@
 [
     {
         "sender": "User",
-        "text": "hi"
+        "text": "hellow"
     },
     {
         "sender": "AI",
         "text": "Hello! How can I help you today?"
-    },
-    {
-        "sender": "User",
-        "text": "hello"
-    },
-    {
-        "sender": "AI",
-        "text": "Hello there! How can I help you today?"
     }
 ]

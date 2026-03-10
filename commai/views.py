@@ -1,11 +1,10 @@
-from commai.settings import BASE_DIR
+from commai.settings import BASE_DIR, ELEVENLABS_API_KEY
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from app.middlewares import auth, guest
 import urllib.parse
-import re
+import re, requests
 import os
-#added
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
 from app.middlewares import auth, guest
@@ -40,8 +39,24 @@ def get_key(dictionary, key):
     """Retrieve a dictionary value by key in Django templates."""
     return dictionary.get(key, [])
 
+@csrf_exempt
+def elevenlabs_token(request):
 
-# Home page for logged-in users (the main page of the service)
+    url = "https://api.elevenlabs.io/v1/single-use-token/realtime_scribe"
+
+    headers = {
+        "xi-api-key": ELEVENLABS_API_KEY,
+        "Content-Type": "application/json"
+    }
+
+    response = requests.post(url, headers=headers)
+
+    # print("Status:", response.status_code)
+    # print("Response:", response.text)
+
+    return JsonResponse(response.json())
+
+# Home page for logged-in users
 def home(request):
     return render(request, 'home.html')
 
@@ -62,7 +77,6 @@ def results(request):
         try:
             conversation_data = json.loads(request.POST.get("conversation", "[]"))
 
-            # Overwrite the conversation file with new conversation data
             with open(CONVERSATION_FILE, "w") as file:
                 json.dump(conversation_data, file, indent=4)
 
@@ -70,14 +84,12 @@ def results(request):
             conversation_data = []
 
     else:
-        # If not a POST request, load the latest saved conversation
         try:
             with open(CONVERSATION_FILE, "r") as file:
                 conversation_data = json.load(file)
         except (FileNotFoundError, json.JSONDecodeError):
             conversation_data = []
 
-    # Extract all user messages and join them into a single string
     user_text = " ".join(msg["text"] for msg in conversation_data if msg["sender"] == "User")
 
     # print(user_text)
@@ -95,7 +107,7 @@ def results(request):
     # print(summary)
     # print(emotion)
     # print(courses)
-    print("Done from views.py...")
+    # print("Done from views.py...")
 
     return render(request, "results.html", {"results": evaluation, "grammer_spelling": grammer_spelling, "level": level, "summary": summary, "emotion": emotion, "courses": courses})
 
@@ -110,7 +122,6 @@ def submit_conversation(request):
             if not conversation_data:
                 return JsonResponse({"error": "No conversation data to save"}, status=400)
 
-            # **Overwrite the conversation file**
             with open(CONVERSATION_FILE, "w") as file:
                 json.dump(conversation_data, file, indent=4)
 
@@ -121,9 +132,6 @@ def submit_conversation(request):
             return JsonResponse({"error": str(e)}, status=500)
 
     return JsonResponse({"error": "Invalid request method"}, status=400)
-
-# Service-related views (no authentication needed)
-
 
 # Setup Logging
 logger = logging.getLogger(__name__)
@@ -137,7 +145,6 @@ model = genai.GenerativeModel("models/gemini-2.5-flash-lite")
 
 @csrf_exempt
 def ask(request):
-    """Handles user input, generates AI response, but does not store to file."""
     if request.method == "POST":
         try:
             data = json.loads(request.body)
@@ -146,14 +153,11 @@ def ask(request):
             if not user_input:
                 return JsonResponse({"error": "Message cannot be empty"}, status=400)
 
-            # Read temporary conversation from request (not stored in file yet)
             conversation_data = data.get("conversation", [])
             
-            # Generate AI response
             response = model.generate_content(user_input)
             ai_response = response.text.strip() if hasattr(response, "text") else "AI response unavailable."
 
-            # Append to conversation (but don't save yet)
             conversation_data.append({"sender": "User", "text": user_input})
             conversation_data.append({"sender": "AI", "text": ai_response})
 
@@ -176,14 +180,11 @@ def easy_mode(request):
     return render(request, 'services/easy_mode.html')
 
 # def submit_writing_exercise(request):
-#     """Handle the submission of writing exercises."""
 #     if request.method == 'POST':
-#         text = request.POST.get('writing_task')  # Correct form access
-#         corrected_text = spell_checker_module.correct_spell(text)  # Correct spelling mistakes
+#         text = request.POST.get('writing_task')
+#         corrected_text = spell_checker_module.correct_spell(text)
 #         corrected_grammar,errors_count,suggestions = spell_checker_module.get_grammar_errors(text)  # Correct grammar errors
-#         # Use Django's messages framework to pass the data to the template
-        
-#         # Show grammar corrections along with suggestions
+#        
 #         if errors_count > 0:
 #             messages.success(request, f"Corrected text: {corrected_text}")
 #             messages.success(request, f"Grammatical Errors & misspelled Words: {corrected_grammar}")
@@ -191,18 +192,17 @@ def easy_mode(request):
 #         else:
 #             messages.success(request, "No grammar errors found.")
         
-#         return redirect('daily_tasks')  # Redirect to the daily tasks page
+#         return redirect('daily_tasks')
     
-#     return redirect('daily_tasks')  # Redirect to the daily tasks page 
+#     return redirect('daily_tasks')
 
 # def submit_speaking_exercise(request):
-#     """Handle the submission of speaking exercises."""
 #     if request.method == 'POST':
 #         speaking_topic = request.POST.get('speaking_topic')
 #         # Process the speaking topic here
-#         print(f"Speaking Topic Received: {speaking_topic}")  # For debugging purposes
+#         print(f"Speaking Topic Received: {speaking_topic}")
 #         return HttpResponse("Thank you for submitting your speaking exercise!")
-#     return redirect('daily_tasks')  # Redirect to the daily tasks page if not POST
+#     return redirect('daily_tasks')
 
 def partners(request):
     return render(request, 'partners/partners.html')
@@ -212,8 +212,5 @@ def contactus(request):
         name = request.POST.get('name')
         email = request.POST.get('email')
         message = request.POST.get('message')
-        # Process the form data (e.g., save it to the database)
         return HttpResponse('Thank you for contacting us!')
     return render(request, 'more/contactus.html')
-
-

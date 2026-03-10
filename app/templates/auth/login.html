@@ -30,7 +30,7 @@
       <div class="inner-container">
         <div class="username-container">
           <label for="{{ form.username.id_for_label }}">Username</label>
-          <input type="text" placeholder="Username" id="username" name="{{ form.username.name }}">
+          <input type="text" placeholder="Username" id="username" name="{{ form.username.name }}" value="admin">
           <i class="fa fa-user" aria-hidden="true" id="user-icon"></i>
           {% if form.username.errors %}
           <span class="text-danger">{{ form.username.errors }}</span>
@@ -39,7 +39,7 @@
 
         <div class="password-container">
           <label for="{{ form.password.id_for_label }}">Password</label>
-          <input type="password" placeholder="Password" id="password" name="{{ form.password.name }}">
+          <input type="password" placeholder="Password" id="password" name="{{ form.password.name }}" value="test@123">
           <i class="fa fa-eye-slash" aria-hidden="true" id="pass-icon" onclick="pass()"></i>
           <span class="text-danger">{{ form.password.errors }}</span>
         </div>

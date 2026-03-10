@@ -7,32 +7,31 @@ from .middlewares import auth, guest
 # def home(request):
 #     return render(request, 'auth/login.html')
 
-# Register view for guests (users not logged in)
-@guest  # Ensuring this is for users not logged in
+# Register view for guests
+@guest
 def register_view(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()  # Save the user after form validation
-            login(request, user)  # Log the user in
-            return redirect('login')  # Redirect to home after successful registration
+            user = form.save()
+            login(request, user)
+            return redirect('login')
     else:
-        form = UserCreationForm()  # For GET request, show an empty form
+        form = UserCreationForm()
 
     return render(request, 'auth/register.html', {'form': form})
 
-
-# Login view for guests (users not logged in)
-@guest  # Ensuring this is for users not logged in
+# Login view for guests
+@guest
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            user = form.get_user()  # Get the user object after form validation
-            login(request, user)  # Log the user in
-            return redirect('home')  # Redirect to home after successful login
+            user = form.get_user()
+            login(request, user)
+            return redirect('home')
     else:
-        form = AuthenticationForm()  # For GET request, show an empty form
+        form = AuthenticationForm()
 
     return render(request, 'auth/login.html', {'form': form})
 
@@ -44,4 +43,4 @@ def dashboard_view(request):
 # Logout view
 def logout_view(request):
     logout(request)
-    return redirect('login')  # Redirect to login page after logging out
+    return redirect('login')

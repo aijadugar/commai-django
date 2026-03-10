@@ -41,8 +41,8 @@
 ## 
 📂 Project Structure
 
-commai-django-Yash/
-├── commapp/
+commai-django/
+├── app/
 │ ├── static/
 │ ├── templates/
 │ ├── views.py
