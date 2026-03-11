@@ -38,27 +38,6 @@
 
 ---
 
-## 
-📂 Project Structure
-
-commai-django/
-├── app/
-│ ├── static/
-│ ├── templates/
-│ ├── views.py
-│ ├── urls.py
-│ └── ...
-├── commai/
-│ ├── settings.py
-│ └── urls.py
-├── media/
-├── db.sqlite3
-├── manage.py
-└── README.md
-
-
----
-
 ## 🚀 How to Run the Project
 
 ### ✅ Prerequisites
